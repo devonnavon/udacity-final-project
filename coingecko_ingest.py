@@ -14,7 +14,7 @@ for coin in all_coins:
     all_meta_data.append(coingecko.get_coin_metadata(coin))
     
 meta_df = pd.DataFrame(all_meta_data)
-meta_csv_path = '/data/coin_meta_data.csv'
+meta_csv_path = 'data/coin_meta_data.csv'
 meta_df.to_csv(meta_csv_path,index=False)
 
 print(f'meta data collected, saved to {meta_csv_path}')
@@ -35,7 +35,7 @@ for coin_id in coin_ids:
     all_coins_dfs.append(response['df'])
         
 prices_df = pd.concat(all_coins_dfs)
-prices_path = '/data/coin_prices.csv'
+prices_path = 'data/coin_prices.csv'
 prices_df.to_csv(prices_path,index=False)
 
 print(f'price data collected, saved to {prices_path}, total of {len(prices_df)} rows')
