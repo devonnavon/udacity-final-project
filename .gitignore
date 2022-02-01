@@ -4,5 +4,7 @@ __pycache__
 */__pycache__/*
 *.ipynb
 data
+input_data
+output_data
 */data/* 
 dl.cfg
