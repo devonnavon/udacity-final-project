@@ -61,6 +61,8 @@ If the data was increased by 100x I'd make the following changes:
 
 If the pipelines would be run on a daily basis by 7 am every day I'd make the following changes:
 
+- In this case I'd want to use a workflow manager and scheduler to run the pipeline automatically at specific times and in a specific order. Airflow would be an ideal choice.
+  - Because the scheduler would need ot keep track of time we'd want to set up Airflow on an EC2 instance so that its always running
 - rather than ingesting all the data at once, I'd want to check the last recorded price or google trend data and fetch only data between the last record and the current timestamp
 - I'd need more context on the by 7 am timeline, if data needed to be as up to date as possible (last price 6am) I'd want to run the pipelines in the middle of the night and again at 4am and again at 6am (depending on average run time), since I'm only fetching the most recent data running the pipeline multiple times would allow the process to run quickly and ensure data is as up to date as possible
 
@@ -68,8 +70,9 @@ If the database needed to be accessed by 100+ people I'd make the following chan
 
 - Context is again important here, it depends who those people are and what they're using the data for
 - Its likely there would be a variety of roles accessing it so it would probably make sense to build a warehouse downstream from the datalake
+  - Redshift would be a good choice as a warehouse because I'd also probably want to move my datalake to S3. Keeping everything in the AWS ecosystem would make transforming data from s3 to redshift relatively simple.
   - this would allow Data and Business Analysts to access the data using SQL
-- On top of the data warehouse we'd want to build dashboards using a technology like looker to give non techincal users access to the data
+- On top of the data warehouse we'd want to build dashboards using a technology like Looker or Tableau to give non techincal users access to the data.
 
 ## Schema
 
