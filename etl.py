@@ -74,7 +74,7 @@ def process_data(spark, input_data, output_data):
         .withColumn('year', year('recorded_at'))\
         .withColumn('weekday', dayofweek('recorded_at'))
 
-    time_table_table_out_path = os.path.join(output_data, 'time_table')
+    time_table_table_out_path = os.path.join(output_data, 'time')
     time_table.write.mode('overwrite').parquet(time_table_table_out_path)
     print(f'time table saved to {time_table_table_out_path}')
 

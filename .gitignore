@@ -2,9 +2,8 @@
 */.ipynb_checkpoints/*
 __pycache__
 */__pycache__/*
-proto_type_notebooks
-*/proto_type_notebooks/*
-*.ipynb
+prototype_notebooks
+*/prototype_notebooks/*
 data
 input_data
 output_data

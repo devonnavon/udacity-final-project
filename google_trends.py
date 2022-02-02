@@ -1,3 +1,4 @@
+import string
 from pytrends.request import TrendReq
 import datetime 
 import os
@@ -11,13 +12,19 @@ def collect_keyword_interest(keyword, start_date, end_date):
                             year_start=start_date.year, month_start=start_date.month, day_start=start_date.day, hour_start=start_date.hour, 
                             year_end=end_date.year, month_end=end_date.month, day_end=end_date.day, hour_end=end_date.hour, 
                             cat=0, sleep=60)
-    df = df.reset_index()[['date',keyword]]
+    try: 
+        df = df.reset_index()[['date',keyword]]
+    except KeyError:
+        print(f'key error on {keyword} retrying')
+        return 'fail_flag'
+
     df.columns = ['date', 'keyword_interest']
     df['keyword'] = keyword
     return df
 
 def coin_keyword_search(keyword, coin_id, start_date, end_date, path_prefix):
     df = collect_keyword_interest(keyword, start_date, end_date)
+    if isinstance(df, string): return 0
     df['coin_id'] = coin_id
     clean_kw = keyword.replace(' ','')
     full_path = os.path.join(path_prefix,f'{coin_id}-{clean_kw}-{start_date.year}-{start_date.month}-{start_date.day}.csv')
